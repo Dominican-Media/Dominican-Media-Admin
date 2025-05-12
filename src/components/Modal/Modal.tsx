@@ -3,7 +3,7 @@
 import { setAllModalsFalse } from "@/helpers/modalHandlers";
 import classes from "./Modal.module.css";
 import ReactDom from "react-dom";
-import Close from "@/assets/SvgIcons/Close";
+import Close from "@/assets/svgIcons/Close";
 
 const BackDrop = (props: any) => {
   return <div className={classes.backdrop} onClick={props.onClick} />;

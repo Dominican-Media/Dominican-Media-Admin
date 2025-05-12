@@ -1,6 +1,6 @@
 "use client";
 
-import ArrowRight from "@/assets/SvgIcons/ArrowRight";
+import ArrowRight from "@/assets/svgIcons/ArrowRight";
 import More from "@/assets/svgIcons/More";
 import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
 import { routes } from "@/utilities/routes";

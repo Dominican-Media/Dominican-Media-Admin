@@ -1,4 +1,4 @@
-import Close from "@/assets/SvgIcons/Close";
+import Close from "@/assets/svgIcons/Close";
 import Plus from "@/assets/svgIcons/Plus";
 import Image from "next/image";
 import Button from "../Button/Button";

@@ -1,6 +1,6 @@
 "use client";
 
-import ChevronDown from "@/assets/SvgIcons/ChevronDown";
+import ChevronDown from "@/assets/svgIcons/ChevronDown";
 import Plus from "@/assets/svgIcons/Plus";
 import { useState } from "react";
 import classes from "./EpisodesCard.module.css";

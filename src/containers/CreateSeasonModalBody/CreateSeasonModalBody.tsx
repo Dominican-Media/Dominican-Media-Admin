@@ -1,4 +1,4 @@
-import Close from "@/assets/SvgIcons/Close";
+import Close from "@/assets/svgIcons/Close";
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import TextArea from "@/components/Textarea/Textarea";
