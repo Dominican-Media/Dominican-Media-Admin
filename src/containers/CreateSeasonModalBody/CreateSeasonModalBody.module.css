@@ -1,0 +1,51 @@
+.container {
+  padding: 1rem;
+  min-width: 500px;
+}
+
+.container > h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.episode {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: var(--gray2);
+  position: relative;
+}
+
+.episode > svg {
+  float: right;
+  user-select: none;
+}
+
+.episode > h4 {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  margin-bottom: 1rem;
+}
+
+.container > form > button {
+  width: 100%;
+}
+
+.buttonSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.buttonSection > button {
+  min-width: 120px;
+}

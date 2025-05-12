@@ -1,0 +1,35 @@
+.container {
+  padding: 1rem;
+  min-width: 500px;
+  max-width: 700px;
+}
+
+.container > h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 150%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.presenters {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-block: 2rem;
+}
+
+.buttonSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.buttonSection > button {
+  min-width: 120px;
+}

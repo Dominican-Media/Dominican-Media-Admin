@@ -1,0 +1,52 @@
+.container {
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+  border: 1.5px solid transparent;
+  position: relative;
+}
+
+.container > svg {
+  position: absolute;
+  top: 0;
+  right: 32px;
+  border-radius: 50%;
+  padding: 0.25rem;
+  background-color: var(--white);
+  cursor: pointer;
+}
+
+.edit > div {
+  border: 2px dashed var(--gray1);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: block;
+  margin-inline: auto;
+}
+
+.edit > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container:not(.edit):hover {
+  border: 1.5px solid var(--gray1);
+}
+
+.container > img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.container > p {
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  width: 120px;
+  text-align: center;
+  margin-top: 0.5rem;
+}

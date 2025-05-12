@@ -1,0 +1,45 @@
+.container {
+  border-radius: 5px;
+  border: 1.5px solid var(--gray1);
+}
+
+.container.edit {
+  border: 1.5px dashed var(--gray1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  cursor: pointer;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.description > div {
+  padding: 0.5rem;
+}
+
+.description > div > p {
+  margin-bottom: 1rem;
+}
+
+.description > div > button {
+  padding: 0.5rem;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  border-radius: 5px;
+}

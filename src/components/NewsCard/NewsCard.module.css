@@ -1,0 +1,96 @@
+.container {
+  cursor: pointer;
+  position: relative;
+}
+
+.container > img {
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(247, 192, 103, 0.8) 100%
+  );
+  object-fit: cover;
+}
+
+.textSection > h4 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  color: var(--black);
+  margin-top: 20px;
+}
+
+.textSection > h4:hover {
+  text-decoration: underline;
+}
+
+.textSection > p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--black);
+  margin-block: 8px 40px;
+}
+
+.textSection {
+  border-bottom: 1px solid var(--black);
+}
+
+.categoryAndAction {
+  padding-block: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.categoryAndAction > p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  text-transform: uppercase;
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  background-color: rgba(153, 153, 153, 0.42);
+}
+
+.options {
+  position: absolute;
+  top: 120%;
+  right: 0%;
+  background-color: var(--white);
+  width: 130px;
+  z-index: 3;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.options > span {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  padding: 0.15rem 0.5rem;
+}
+
+.options > span:hover {
+  background-color: var(--gray1);
+}
+
+.options > span:not(.options > span:last-child) {
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,116 @@
+.button {
+  display: flex;
+  padding: 12px 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: "Lato";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 150%;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+}
+
+.button:hover {
+  opacity: 0.8;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  gap: 12px;
+}
+
+.primary {
+  background: var(--black);
+  border: none;
+  color: var(--white);
+}
+
+.primary:active {
+  background-color: var(--yellow-dark);
+  color: var(--black);
+}
+
+.secondary {
+  background: transparent;
+  border: 1.5px solid var(--white);
+  color: var(--white);
+}
+
+.secondary:active {
+  border: 1px solid var(--yellow);
+  color: var(--white);
+}
+
+.tertiary {
+  background-color: var(--white);
+  color: var(--black);
+  border: none;
+}
+
+.bordered {
+  background-color: transparent;
+  color: var(--black);
+  border: 2px solid var(--black);
+}
+
+.dashed {
+  background-color: transparent;
+  color: var(--black);
+  border: 2px dashed var(--black);
+}
+
+.null {
+  background-color: transparent;
+  color: var(--black);
+  border: none;
+}
+
+.tertiary:active {
+  background: var(--tertiaryButtonActive);
+}
+
+.invalid {
+  border: none;
+  color: var(--black);
+  background: var(--grey6);
+}
+
+.delete {
+  border: none;
+  color: var(--white);
+  background: var(--red);
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--buttonIdonBg);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.button:disabled {
+  background-color: var(--grey2);
+}
+
+@media screen and (min-width: 767px) and (max-width: 1023px) {
+  .button {
+    font-size: 16px;
+    line-height: 150%;
+    padding: 8px 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .button {
+    font-size: 16px;
+    line-height: 150%;
+    padding: 16px;
+  }
+}
