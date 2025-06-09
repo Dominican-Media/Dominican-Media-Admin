@@ -1,0 +1,64 @@
+.container {
+  margin-bottom: 1rem;
+}
+
+.editor-wrapper {
+  border: 1px solid var(--black);
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  margin-top: 0.5rem;
+}
+
+.menu-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  border-bottom: 1px solid var(--black);
+  /* background-color: #f3f3f3; */
+  border-radius: 4px 4px 0 0;
+}
+
+.menu-button {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 60px;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.menu-button:hover {
+  background-color: #e6e6e6;
+}
+
+.menu-button.active {
+  background-color: #4285f4;
+  color: white;
+  border-color: #4285f4;
+}
+
+.editor-content {
+  padding: 16px;
+  min-height: 200px;
+  outline: none;
+}
+
+.editor-content > div {
+  min-height: 200px;
+  outline: none;
+}
+
+.container > label {
+  font-family: "Lato";
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: left;
+  display: block;
+}
+

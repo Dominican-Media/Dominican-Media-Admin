@@ -1,36 +1,45 @@
 "use client";
 
 import Plus from "@/assets/svgIcons/Plus";
-import Button from "@/components/Button/Button";
-import DeleteModalBody from "@/components/DeleteModalBody/DeleteModalBody";
 import Modal from "@/components/Modal/Modal";
-import { setAllModalsFalse } from "@/helpers/modalHandlers";
-import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
+import { setAllModalsFalse, setModalTrue } from "@/helpers/modalHandlers";
+import { useServices } from "@/hooks/useServices";
 import DashboardLayout from "@/layouts/DashboardLayout/DashboardLayout";
 import { modalGenericType } from "@/utilities/types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import AddServiceModalBody from "../AddServiceModalBody/AddServiceModalBody";
 import ServiceList from "../ServiceList/ServiceList";
 
 const Services = () => {
-  // Hpoks
-  const { updateConcurrentSearchParams, updateSearchParams } =
-    useUpdateSearchParams();
+  // Requests
+  const { isLoading, data } = useServices();
 
-  //   Router
-  const service = updateSearchParams("service", undefined, "get");
+  // States
+  const [activeServiceId, setActiveServiceId] = useState<null | string>(null);
+  const [modals, setModals] = useState<modalGenericType>({
+    createOrUpdate: false,
+  });
+
+  // Memos
+  const services = useMemo(() => data?.data, [data]);
 
   return (
     <>
-      {service && (
+      {modals?.createOrUpdate && (
         <Modal
           onClick={() => {
-            updateConcurrentSearchParams({
-              service: { method: "delete" },
-              edit: { method: "delete" },
-            });
+            setActiveServiceId(null);
+            setAllModalsFalse(setModals);
           }}
-          body={<AddServiceModalBody />}
+          body={
+            <AddServiceModalBody
+              activeServiceId={activeServiceId}
+              onClose={() => {
+                setAllModalsFalse(setModals);
+                setActiveServiceId(null);
+              }}
+            />
+          }
         />
       )}
 
@@ -39,12 +48,18 @@ const Services = () => {
         button={{
           text: "Add Service",
           action: () => {
-            updateSearchParams("service", "add", "set");
+            setActiveServiceId(null);
+            setModalTrue(setModals, "createOrUpdate");
           },
           icon: <Plus />,
         }}
       >
-        <ServiceList />
+        <ServiceList
+          data={services}
+          loading={isLoading}
+          activeServiceId={activeServiceId}
+          setActiveServiceId={setActiveServiceId}
+        />
       </DashboardLayout>
     </>
   );

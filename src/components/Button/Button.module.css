@@ -35,8 +35,8 @@
 
 .secondary {
   background: transparent;
-  border: 1.5px solid var(--white);
-  color: var(--white);
+  border: 1.5px solid var(--black);
+  color: var(--black);
 }
 
 .secondary:active {
@@ -96,7 +96,8 @@
 }
 
 .button:disabled {
-  background-color: var(--grey2);
+  background-color: var(--gray1);
+  pointer-events: none;
 }
 
 @media screen and (min-width: 767px) and (max-width: 1023px) {

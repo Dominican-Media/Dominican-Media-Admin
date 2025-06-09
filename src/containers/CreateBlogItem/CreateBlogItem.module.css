@@ -1,0 +1,30 @@
+.container {
+  padding: 2rem 1rem;
+}
+
+.container > form {
+  max-width: 700px;
+}
+
+.buttonSection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 3rem;
+}
+
+.container > form > h4 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+}
+
+.container > form > h4:not(.container > form > h4:first-child) {
+  margin-block: 3rem 1.5rem;
+}
+
+.container > form > h4:first-child {
+  margin-block: 1rem 1.5rem;
+}

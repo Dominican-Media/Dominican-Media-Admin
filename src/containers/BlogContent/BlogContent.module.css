@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  gap: 4rem;
+}
+
+.container > section:first-child {
+  flex-basis: 412px;
+}
+
+.container > section:nth-child(2) {
+  flex: 1;
+}

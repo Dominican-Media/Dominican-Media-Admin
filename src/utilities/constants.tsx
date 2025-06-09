@@ -254,3 +254,5 @@ export const TEAM = [
     images: IMAGES.YEWANDE,
   },
 ];
+
+export const LOCAL_STORAGE_AUTH_KEY = "dominican-media-auth-token";

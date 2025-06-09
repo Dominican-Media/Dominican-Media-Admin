@@ -26,7 +26,7 @@ const Sidenav = ({ onClose }: SidenavTypes) => {
                 key={i}
                 href={route?.route}
                 className={
-                  pathname.includes(route?.route)
+                  route.route.includes(pathname)
                     ? classes.active
                     : classes.inActive
                 }

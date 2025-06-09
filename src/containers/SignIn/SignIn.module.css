@@ -1,0 +1,30 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > form {
+  min-width: 30%;
+}
+
+.container > h4 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 140%;
+  margin-top: 1rem;
+  min-width: 30%;
+  margin-block: 2rem;
+  text-align: center;
+}
+
+.container > a {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  min-width: 30%;
+}

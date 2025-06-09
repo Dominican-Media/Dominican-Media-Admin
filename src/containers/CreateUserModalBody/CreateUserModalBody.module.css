@@ -1,0 +1,14 @@
+.container {
+  padding: 2rem 1rem;
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.container > h4 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -1px;
+  flex-basis: 100%;
+  margin-bottom: 2rem;
+}

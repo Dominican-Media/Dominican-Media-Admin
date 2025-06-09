@@ -11,6 +11,7 @@ type DashboardLayout = {
     action: () => void;
     icon?: React.ReactNode;
   };
+  noSideNav?: boolean;
 };
 
 const DashboardLayout = ({
@@ -18,10 +19,11 @@ const DashboardLayout = ({
   className,
   header,
   button,
+  noSideNav,
 }: DashboardLayout) => {
   return (
     <main className={classes.container}>
-      <DashboardSideNav />
+      {!noSideNav && <DashboardSideNav />}
 
       <section>
         <DashboardHeader header={header} button={button} />

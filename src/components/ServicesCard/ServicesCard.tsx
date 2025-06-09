@@ -1,27 +1,29 @@
 import More from "@/assets/svgIcons/More";
-import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import classes from "./ServicesCard.module.css";
 
 type ServicesCardType = {
-  image: string;
+  image: string | File | null;
   title: string;
-  caption: string;
-  onDelete?: () => void;
+  description: string;
+  id?: string;
+  onDelete?: (id?: string) => void;
+  onClick?: (id: string) => void;
+  onEdit?: () => void;
 };
 
 const ServicesCard = ({
   image,
   title,
-  caption,
+  description,
   onDelete,
+  id,
+  onClick,
+  onEdit,
 }: ServicesCardType) => {
   // States
   const [showOptions, setShowOptions] = useState(false);
-
-  // Hooks
-  const { updateConcurrentSearchParams } = useUpdateSearchParams();
 
   // Ref
   const optionsRef = useRef<null | HTMLDivElement>(null);
@@ -44,10 +46,13 @@ const ServicesCard = ({
   });
 
   return (
-    <div className={classes.container}>
-      <Image src={image} alt={title} width={610} height={589} />
+    <div
+      className={classes.container}
+      onClick={() => onClick && onClick(id as string)}
+    >
+      <Image src={image as string} alt={title} width={610} height={589} />
       <h4>{title}</h4>
-      <p>{caption}</p>
+      <p>{description}</p>
       <span
         className={classes.more}
         onClick={() => setShowOptions((prevState) => !prevState)}
@@ -56,17 +61,10 @@ const ServicesCard = ({
 
         {showOptions && (
           <div className={classes.options} ref={optionsRef}>
-            <span
-              onClick={() => {
-                updateConcurrentSearchParams({
-                  service: { method: "set", value: "1" },
-                  edit: { method: "set", value: "true" },
-                });
-              }}
-            >
-              Edit{" "}
+            <span onClick={() => onEdit && onEdit()}>Edit </span>
+            <span onClick={() => onDelete && onDelete(id as string)}>
+              Delete
             </span>
-            <span onClick={() => onDelete && onDelete()}>Delete </span>
           </div>
         )}
       </span>

@@ -6,6 +6,7 @@ type DeleteModalbodyTypes = {
   caption: string;
   onClose: () => void;
   onDelete: () => void;
+  isLoading: boolean;
 };
 
 const DeleteModalBody = ({
@@ -13,6 +14,7 @@ const DeleteModalBody = ({
   onDelete,
   text,
   caption,
+  isLoading,
 }: DeleteModalbodyTypes) => {
   return (
     <div className={classes.container}>
@@ -20,11 +22,15 @@ const DeleteModalBody = ({
       <p>{caption}</p>
 
       <div className={classes.buttonSection}>
-        <Button type="invalid" onClick={onClose}>
+        <Button type="invalid" onClick={onClose} disabled={isLoading}>
           Cancel
         </Button>
-        <Button type="delete" onClick={() => onDelete && onDelete()}>
-          Logout
+        <Button
+          type="delete"
+          onClick={() => onDelete && onDelete()}
+          loading={isLoading}
+        >
+          Delete
         </Button>
       </div>
     </div>

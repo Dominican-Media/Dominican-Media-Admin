@@ -68,10 +68,7 @@ const NewsCard = ({
           <div className={classes.options} ref={optionsRef}>
             <span
               onClick={() => {
-                updateConcurrentSearchParams({
-                  service: { method: "set", value: "1" },
-                  edit: { method: "set", value: "true" },
-                });
+                router.push(`/blog/1/edit`);
               }}
             >
               Edit Blog Item{" "}
