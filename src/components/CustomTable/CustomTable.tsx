@@ -167,7 +167,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
       {loading && (
         <LinearProgress
           color="inherit"
-          style={{ color: "#edd014", height: "2px" }}
+          style={{ color: "#000", height: "2px" }}
         />
       )}
 

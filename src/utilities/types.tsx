@@ -2,11 +2,21 @@ export type modalGenericType = {
   [key: string]: boolean;
 };
 
+export type queryObjectType = { [key: string]: string | number };
+
 export type blogItemType = {
-  image: string;
+  image: null | File | string;
   title: string;
+  description: string;
   caption: string;
-  category: string;
+  category: string[];
+  type: string;
+  content: string;
+  facebookUrl: string;
+  xUrl: string;
+  instagramUrl: string;
+  createdAt?: string | Date;
+  previewImage?: string | null;
 };
 
 export type navItemTypes = {
@@ -29,7 +39,12 @@ export type userType = {
   email: string;
   firstName: string;
   lastName: string;
-  image: string;
+  image?: string | null | File;
+  phone?: string;
+  gender?: string;
+  role?: string;
+  password?: string;
+  bio: string;
 };
 
 export type servicesType = {
@@ -37,4 +52,9 @@ export type servicesType = {
   description: string;
   image: string | null | File;
   _id?: string;
+};
+
+export type blogCategoriesType = {
+  _id: string;
+  title: string;
 };

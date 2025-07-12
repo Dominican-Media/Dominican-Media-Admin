@@ -2,55 +2,91 @@
 
 import ArrowBack from "@/assets/svgIcons/ArrowBack";
 import Button from "@/components/Button/Button";
+import { BlogContext } from "@/context/BlogContext";
+import { useToast } from "@/context/ToastContext";
+import { requestHandler } from "@/helpers/requestHandler";
+import useError from "@/hooks/useError";
 import { IMAGES } from "@/utilities/constants";
 import { routes } from "@/utilities/routes";
+import { requestType } from "@/utilities/types";
 import { Check } from "@mui/icons-material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 import classes from "./BlogContentText.module.css";
 
 const BlogContentText = () => {
   // Router
   const router = useRouter();
 
+  // Context
+  const { blogData, resetBlogState } = useContext(BlogContext);
+
+  // States
+  const [requestState, setRequestState] = useState<requestType>({
+    isLoading: false,
+    data: null,
+    error: null,
+  });
+  const [formDataState, setFormDataState] = useState(new FormData());
+
+  // Hooks
+  const { showToast } = useToast();
+  const { errorFlowFunction } = useError();
+
+  // Requets
+  const handleUPublishBlogItem = () => {
+    requestHandler({
+      url: "/blogs",
+      method: "POST",
+      isMultipart: true,
+      data: formDataState,
+      state: requestState,
+      setState: setRequestState,
+      requestCleanup: true,
+      successFunction(res) {
+        showToast(res?.data?.message, "success");
+        resetBlogState();
+        router.push(routes.BLOG);
+      },
+      errorFunction(err) {
+        errorFlowFunction(err);
+      },
+    });
+  };
+
+  // Effects
+  useEffect(() => {
+    const formData = new FormData();
+
+    formData.append("title", blogData?.title);
+    formData.append("description", blogData?.description);
+    formData.append("category", JSON.stringify(blogData?.category));
+    formData.append("content", blogData?.content);
+    formData.append("facebookUrl", blogData?.facebookUrl);
+    formData.append("instagramUrl", blogData?.instagramUrl);
+    formData.append("xUrl", blogData?.xUrl);
+    formData.append("image", blogData?.image as File);
+    formData.append("type", blogData?.type);
+
+    setFormDataState(formData);
+  }, [blogData]);
+
   return (
     <section className={classes.container}>
-      <Image
-        src={IMAGES.FEATURED_BLOG}
-        alt="Blog Title"
-        height={500}
-        width={500}
-      />
+      {blogData?.previewImage && (
+        <Image
+          src={blogData?.previewImage as string}
+          alt="Blog Title"
+          height={500}
+          width={500}
+        />
+      )}
 
-      <div className={classes.textSection}>
-        It’s a typical down-on-the-dock scene in Maine. A handful of old-timers
-        who have cruised this coast for better than a half-century share stories
-        about favorite anchorages, shoreside hikes and precious swimming
-        quarries. For them, the islands of Maine make life worth living, and the
-        chance to sail among them summer after summer has more than justified
-        the annual expense and effort they put into maintaining their sailboats.
-        And then along comes Steve Stone and Amy Tunney, relative newcomers to
-        town. Each is carrying a dry bag and wearing a backpack in preparation
-        for a camp-­cruising voyage down Blue Hill Bay. Once out in the open
-        water, they’ll make a final assessment of the wind forecast over
-        the coming days, and they’ll ease off toward Acadia National Park to
-        port, or toward Merchant Row and Vinalhaven to starboard... Lorem ipsum
-        dolor sit amet consectetur adipisicing elit. Iusto esse commodi
-        similique itaque. Voluptatem, possimus dolores. Molestias nulla ad esse
-        suscipit consequatur obcaecati eius fugit atque accusamus, rerum
-        corrupti quis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Quas laboriosam rerum nostrum. Laboriosam ipsa non harum assumenda
-        aperiam recusandae doloremque, aliquam pariatur hic minima nisi
-        obcaecati eveniet commodi quam rem excepturi nulla cupiditate nemo, in
-        odit at illum rerum quod? Doloribus deserunt quo optio libero quasi,
-        dolorum asperiores ea numquam doloremque ut id earum architecto, ex
-        accusantium sint corporis odio praesentium harum, voluptate autem.
-        Praesentium quibusdam culpa, delectus corporis sunt vel libero
-        blanditiis tempora, quidem vitae rerum, debitis distinctio nostrum
-        quisquam velit labore dolore consectetur. Nesciunt sapiente illo
-        reprehenderit distinctio eius adipisci possimus, temporibus animi in
-        dicta alias error vitae?
-      </div>
+      <div
+        className={classes.textSection}
+        dangerouslySetInnerHTML={{ __html: blogData?.content }}
+      ></div>
 
       <div className={classes.buttonSection}>
         <Button
@@ -63,7 +99,12 @@ const BlogContentText = () => {
           <span>Continue editing</span>
         </Button>
 
-        <Button>
+        <Button
+          onClick={() => {
+            handleUPublishBlogItem();
+          }}
+          loading={requestState?.isLoading}
+        >
           <Check color="inherit" style={{ color: "#fff" }} />
           <span>Publish</span>
         </Button>

@@ -27,18 +27,24 @@ export const dashboardRoutes = [
     route: routes.DASHBOARD,
     properties: ["isProtected", "isSideNavRoute"],
     icon: <Dashboard />,
+    roles: ["admin", "presenter", "author"],
+    bounceRoute: routes?.DASHBOARD,
   },
   {
     title: "Blog",
     route: routes.BLOG,
     properties: ["isProtected", "isSideNavRoute"],
     icon: <File />,
+    roles: ["admin", "author"],
+    bounceRoute: routes?.DASHBOARD,
   },
   {
     title: "Services",
     route: routes.SERVICES,
     properties: ["isProtected", "isSideNavRoute"],
     icon: <Services />,
+    roles: ["admin"],
+    bounceRoute: routes?.DASHBOARD,
   },
 
   {
@@ -46,17 +52,23 @@ export const dashboardRoutes = [
     route: routes.SHOWS,
     properties: ["isProtected", "isSideNavRoute"],
     icon: <Shows />,
+    roles: ["admin", "presenter"],
+    bounceRoute: routes?.DASHBOARD,
   },
   {
     title: "Profiles",
     route: routes.PROFILES,
     properties: ["isProtected", "isSideNavRoute"],
     icon: <Group />,
+    roles: ["admin"],
+    bounceRoute: routes?.DASHBOARD,
   },
   {
     title: "Gallery",
     route: routes.GALLERY,
     properties: ["isProtected", "isSideNavRoute"],
     icon: <Photos />,
+    roles: ["admin"],
+    bounceRoute: routes?.DASHBOARD,
   },
 ];

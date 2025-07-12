@@ -13,6 +13,8 @@ type FileUploadInputTypes = {
   id?: string;
   accept?: string;
   notShowFiles?: boolean;
+  imagePreview?: string | null;
+  setImagePreview?: Dispatch<SetStateAction<string | null>>;
 };
 
 const FileUploadInput = ({
@@ -22,6 +24,8 @@ const FileUploadInput = ({
   id,
   accept,
   notShowFiles,
+  imagePreview,
+  setImagePreview,
 }: FileUploadInputTypes) => {
   // States
   const [isDraggingOver, setIsDraggingOver] = useState(false);
@@ -52,7 +56,31 @@ const FileUploadInput = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const selectedFiles = Array.from(e.target.files);
-      setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+
+      setFiles((prevFiles) => {
+        if (prevFiles?.length > 0) {
+          return [...(prevFiles as File[]), ...selectedFiles];
+        } else {
+          return [...selectedFiles];
+        }
+      });
+
+      if (accept?.includes("image")) {
+        handleImageChange(e);
+      }
+    }
+  };
+
+  const handleImageChange = (e: any) => {
+    if (setImagePreview) {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith("image/")) {
+        const imageUrl = URL.createObjectURL(file);
+
+        setImagePreview(imageUrl as string);
+      } else {
+        setImagePreview(null);
+      }
     }
   };
 
@@ -61,49 +89,57 @@ const FileUploadInput = ({
       return data?.name !== name;
     });
     setFiles(filteredFiles);
+    if (setImagePreview) setImagePreview(null);
   };
 
   return (
     <div className={classes.container}>
       <p>{title}</p>
-      <div
-        className={classes.uploadContainer}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        style={
-          isDraggingOver
-            ? { border: "2px dashed #000" }
-            : { border: "1px solid #000" }
-        }
-      >
-        <Image src={IMAGES.UPLOAD} alt="Upload" width={150} height={70} />
+      {imagePreview ? (
+        <div className={classes.previewImage}>
+          <img alt="Image upload" src={imagePreview} />
+        </div>
+      ) : (
+        <div
+          className={classes.uploadContainer}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          style={
+            isDraggingOver
+              ? { border: "2px dashed #000" }
+              : { border: "1px solid #000" }
+          }
+        >
+          <Image src={IMAGES.UPLOAD} alt="Upload" width={150} height={70} />
 
-        <h4>
-          Drag and drop files or <label htmlFor={id || "file"}>Browse</label>
-        </h4>
+          <h4>
+            Drag and drop files or <label htmlFor={id || "file"}>Browse</label>
+          </h4>
 
-        <input
-          type="file"
-          id={id || "file"}
-          accept={accept}
-          onChange={handleFileChange}
-        />
+          <input
+            type="file"
+            id={id || "file"}
+            accept={accept}
+            onChange={handleFileChange}
+          />
 
-        <p>Supported formates: JPEG, PNG</p>
-      </div>
+          <p>Supported formates: JPEG, PNG</p>
+        </div>
+      )}
 
       {!notShowFiles && files?.length > 0 && (
         <div className={classes.uploaded}>
           <h4>Uploaded File</h4>
 
-          {files?.map((data, i) => {
-            return (
-              <div key={i}>
-                <span>{data?.name}</span>
-                <Close onClick={() => filterFiles(data?.name)} />
-              </div>
-            );
-          })}
+          {(files as File[])?.length > 0 &&
+            files?.map((data, i) => {
+              return (
+                <div key={i}>
+                  <span>{data?.name}</span>
+                  <Close onClick={() => filterFiles(data?.name)} />
+                </div>
+              );
+            })}
         </div>
       )}
     </div>

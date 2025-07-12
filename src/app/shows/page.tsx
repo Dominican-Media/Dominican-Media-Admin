@@ -1,10 +1,13 @@
+import RequireAuth from "@/components/RequireAuth/RequireAuth";
 import Shows from "@/containers/Shows/Shows";
 import React, { Suspense } from "react";
 
 const page = () => {
   return (
     <Suspense>
-      <Shows />
+      <RequireAuth>
+        <Shows />
+      </RequireAuth>
     </Suspense>
   );
 };

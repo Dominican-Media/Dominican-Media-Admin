@@ -93,13 +93,14 @@
 .errorMessage {
   color: #ff6166;
   font-family: "Lato";
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
   animation: appear 0.2s ease-in-out;
   transition: all 0.3s ease-in-out;
   display: block;
+  margin-bottom: 0.25rem;
 }
 
 .tip {

@@ -57,7 +57,7 @@
   padding: 0.5rem;
   border: 1px solid var(--black);
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .uploaded > div > span {
@@ -72,4 +72,17 @@
 
 .uploaded > div > svg {
   flex-shrink: 0;
+}
+
+.previewImage {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.previewImage > img {
+  max-width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  margin-inline: auto;
 }

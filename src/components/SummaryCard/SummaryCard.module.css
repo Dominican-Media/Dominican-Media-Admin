@@ -33,6 +33,7 @@
   font-size: 32px;
   z-index: 2;
   position: relative;
+  color: var(--white);
 }
 
 .container > div:not(.overlay, .iconContainer) {

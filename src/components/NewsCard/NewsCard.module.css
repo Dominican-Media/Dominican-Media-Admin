@@ -1,6 +1,9 @@
 .container {
   cursor: pointer;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc(25% - 20px);
 }
 
 .container > img {
@@ -31,11 +34,17 @@
   font-size: 16px;
   line-height: 150%;
   color: var(--black);
-  margin-block: 8px 40px;
+  margin-block: 8px 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .textSection {
   border-bottom: 1px solid var(--black);
+  flex: 1;
 }
 
 .categoryAndAction {

@@ -16,16 +16,21 @@ const Profiles = () => {
   // States
   const [modals, setModals] = useState<modalGenericType>({
     createUser: false,
+    editUser: false,
   });
+  const [activeUser, setActiveUser] = useState<null | string>(null);
 
   return (
     <>
       {modals.createUser && (
         <Modal
           onClick={() => setAllModalsFalse(setModals)}
-          body={<CreateUserModalBody />}
+          body={
+            <CreateUserModalBody onClose={() => setAllModalsFalse(setModals)} />
+          }
         />
       )}
+
       <DashboardLayout
         header="Profiles"
         className={classes.container}
@@ -39,7 +44,10 @@ const Profiles = () => {
       >
         <GreetingComponent />
         <ProfilesStats />
-        <ProfilesTable />
+        <ProfilesTable
+          setActiveUserId={setActiveUser}
+          activeUserId={activeUser}
+        />
       </DashboardLayout>
     </>
   );

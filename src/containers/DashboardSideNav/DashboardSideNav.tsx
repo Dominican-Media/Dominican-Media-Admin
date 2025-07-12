@@ -24,7 +24,7 @@ const DashboardSideNav = () => {
   });
 
   // Context
-  const { logout } = useContext(AuthUserContext);
+  const { logout, user } = useContext(AuthUserContext);
 
   // Ref
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -48,21 +48,27 @@ const DashboardSideNav = () => {
         <Logo />
 
         <ul>
-          {dashboardRoutes?.map((data) => {
-            return (
-              <li
-                className={
-                  pathname === data?.route ? classes.active : classes.inActive
-                }
-                key={data?.route}
-              >
-                <Link href={data?.route}>
-                  {data?.icon}
-                  <span>{data?.title}</span>
-                </Link>
-              </li>
-            );
-          })}
+          {dashboardRoutes
+            ?.filter((data) => {
+              return data?.roles?.includes(user?.role as string);
+            })
+            ?.map((data) => {
+              return (
+                <li
+                  className={
+                    pathname.includes(data?.route)
+                      ? classes.active
+                      : classes.inActive
+                  }
+                  key={data?.route}
+                >
+                  <Link href={data?.route}>
+                    {data?.icon}
+                    <span>{data?.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
 
         <div

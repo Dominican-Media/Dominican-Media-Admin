@@ -3,7 +3,8 @@
 }
 
 .container > form {
-  max-width: 700px;
+  width: 800px;
+  /* margin-inline: auto; */
 }
 
 .buttonSection {
@@ -27,4 +28,42 @@
 
 .container > form > h4:first-child {
   margin-block: 1rem 1.5rem;
+}
+
+.createBlog {
+  margin-bottom: 1rem;
+}
+
+.createBlog > button {
+  padding: 0.5rem;
+  margin-left: auto;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.category {
+  border: 1px solid var(--black);
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 5px;
+}
+
+.category > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category > span:nth-child(1) {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
 }

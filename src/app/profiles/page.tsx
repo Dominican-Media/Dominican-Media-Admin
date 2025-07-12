@@ -1,11 +1,14 @@
 import Loader from "@/components/Loader/Loader";
+import RequireAuth from "@/components/RequireAuth/RequireAuth";
 import Profiles from "@/containers/Profiles/Profiles";
 import React, { Suspense } from "react";
 
 const page = () => {
   return (
     <Suspense fallback={<Loader />}>
-      <Profiles />
+      <RequireAuth>
+        <Profiles />
+      </RequireAuth>
     </Suspense>
   );
 };

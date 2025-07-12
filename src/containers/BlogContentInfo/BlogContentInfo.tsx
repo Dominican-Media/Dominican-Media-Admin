@@ -1,48 +1,95 @@
+"use client";
+
+import Loader from "@/components/Loader/Loader";
+import { AuthUserContext } from "@/context/AuthUserContext";
+import { BlogContext } from "@/context/BlogContext";
+import { capitalizeEachWord } from "@/helpers/capitalize";
+import { useCategories } from "@/hooks/useBlogs";
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+import moment from "moment";
+import { useContext } from "react";
 import classes from "./BlogContentInfo.module.css";
 
 const BlogContentInfo = () => {
+  // Context
+  const { blogData } = useContext(BlogContext);
+  const { user } = useContext(AuthUserContext);
+
+  const { isLoading, data: categoriesData } = useCategories();
+
   return (
     <section className={classes.container}>
-      <div className={classes.header}>
-        <p>
-          Experiences | <span>Video</span>
-        </p>
-        <h2>Cruising in Quarantine</h2>
-        <p>
-          Amid the COVID-19 pandemic, a young family takes a break from long
-          voyages and finds joy staying put in a small bay in Mexico.
-        </p>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={classes.header}>
+            <div className={classes.categories}>
+              {blogData?.category?.map((data, i) => {
+                const categoryTitle = (
+                  categoriesData?.data?.categories as any
+                )?.find((datum: any) => data === datum?._id)?.title;
 
-      <div>
-        <h4>Video by</h4>
-        <p>Dominican media</p>
-      </div>
+                return (
+                  <p>
+                    {categoryTitle}{" "}
+                    {i !== blogData?.category?.length - 1 && "|"}
+                  </p>
+                );
+              })}
+            </div>
 
-      <div>
-        <h4>Text by</h4>
-        <p>David Nabarro</p>
-      </div>
+            <h2>{blogData?.title}</h2>
+            <p>{blogData?.description}</p>
+          </div>
 
-      <div>
-        <h4>Posted</h4>
-        <p>November 1</p>
-      </div>
+          <div>
+            <h4>Text by</h4>
+            <p>
+              {capitalizeEachWord(
+                `${user?.firstName || ""} ${user?.lastName || ""}`
+              )}
+            </p>
+          </div>
 
-      <div>
-        <a>
-          <Facebook />
-        </a>
+          <div>
+            <h4>Posted</h4>
+            <p>{moment(blogData?.createdAt)?.format("Do MMMM, YYYY")}</p>
+          </div>
 
-        <a>
-          <Instagram />
-        </a>
+          {(blogData?.instagramUrl ||
+            blogData?.xUrl ||
+            blogData?.facebookUrl) && (
+            <div>
+              {blogData?.facebookUrl && (
+                <a
+                  href={blogData?.facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Facebook />
+                </a>
+              )}
 
-        <a>
-          <Twitter />
-        </a>
-      </div>
+              {blogData?.instagramUrl && (
+                <a
+                  href={blogData?.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Instagram />
+                </a>
+              )}
+
+              {blogData?.xUrl && (
+                <a href={blogData?.xUrl} target="_blank" rel="noreferrer">
+                  <Twitter />
+                </a>
+              )}
+            </div>
+          )}
+        </>
+      )}
     </section>
   );
 };

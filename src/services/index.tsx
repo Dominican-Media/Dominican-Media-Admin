@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(
     if (response?.status === 200 || response?.status === 201) {
       return response;
     } else {
-      throw new Error(response?.data?.error?.message);
+      throw new Error(response?.data?.message);
     }
   },
   async (err) => {

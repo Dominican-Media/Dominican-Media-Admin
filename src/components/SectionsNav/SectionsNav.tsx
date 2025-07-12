@@ -1,7 +1,7 @@
 "use client";
 
 import { activeToggler } from "@/helpers/activeHandlers";
-import { Dispatch, SetStateAction, Suspense } from "react";
+import { Dispatch, SetStateAction, Suspense, useEffect } from "react";
 import classes from "./SectionsNav.module.css";
 import { navItemTypes } from "@/utilities/types";
 import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
@@ -25,6 +25,21 @@ const SectionsNav = ({
 }: SectionsNavTypes) => {
   // Hooks
   const { updateSearchParams } = useUpdateSearchParams();
+  const param = updateSearchParams(id as string, undefined, "get");
+
+  useEffect(() => {
+    if (type) {
+      setNavItems((prevState: any) => {
+        return prevState.map((data: any) => {
+          if ((data?.id as string) === (param as string)) {
+            return { ...data, isActive: true };
+          } else {
+            return { ...prevState, isActive: false };
+          }
+        });
+      });
+    }
+  }, [param]);
 
   return (
     <Suspense fallback={<Loader />}>
@@ -35,7 +50,11 @@ const SectionsNav = ({
               key={index}
               onClick={() => {
                 if (isRoute) {
-                  updateSearchParams("section", navItem?.id, "set");
+                  if (navItem?.id === "all") {
+                    updateSearchParams(id || "section", undefined, "delete");
+                  } else {
+                    updateSearchParams(id || "section", navItem?.id, "set");
+                  }
                 }
                 activeToggler(index, navItems, setNavItems);
               }}

@@ -2,7 +2,9 @@
 
 import ArrowRight from "@/assets/svgIcons/ArrowRight";
 import More from "@/assets/svgIcons/More";
+import { capitalize } from "@/helpers/capitalize";
 import useUpdateSearchParams from "@/hooks/useUpdateSearchParams";
+import { IMAGES } from "@/utilities/constants";
 import { routes } from "@/utilities/routes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,28 +13,27 @@ import Button from "../Button/Button";
 import classes from "./NewsCard.module.css";
 
 type NewsCardTypes = {
-  image: string;
+  image: string | File | null;
   title: string;
-  caption: string;
-  category: string;
-  onDelete?: () => void;
+  description: string;
+  onDelete?: (slug: string) => void;
+  slug?: string;
+  type?: string;
 };
 
 const NewsCard = ({
   image,
   title,
-  caption,
-  category,
+  description,
   onDelete,
+  slug,
+  type,
 }: NewsCardTypes) => {
   // Router
   const router = useRouter();
 
   // States
   const [showOptions, setShowOptions] = useState(false);
-
-  // Hooks
-  const { updateConcurrentSearchParams } = useUpdateSearchParams();
 
   // Ref
   const optionsRef = useRef<null | HTMLDivElement>(null);
@@ -56,7 +57,12 @@ const NewsCard = ({
 
   return (
     <div className={classes.container}>
-      <Image height={280} width={418} src={image} alt={title} />
+      <Image
+        height={280}
+        width={418}
+        src={(image as string) || IMAGES.LOGO}
+        alt={title}
+      />
 
       <span
         className={classes.more}
@@ -68,27 +74,29 @@ const NewsCard = ({
           <div className={classes.options} ref={optionsRef}>
             <span
               onClick={() => {
-                router.push(`/blog/1/edit`);
+                router.push(`/blog/${slug}/edit`);
               }}
             >
               Edit Blog Item{" "}
             </span>
-            <span onClick={() => onDelete && onDelete()}>Delete </span>
+            <span onClick={() => onDelete && onDelete(slug as string)}>
+              Delete{" "}
+            </span>
           </div>
         )}
       </span>
 
       <div className={classes.textSection}>
-        <h4>{title}</h4>
-        <p>{caption}</p>
+        <h4>{title || "No title"}</h4>
+        <p>{description || "No description"}</p>
       </div>
 
       <div className={classes.categoryAndAction}>
-        <p>{category}</p>
+        <p>{capitalize(type as string) || "No type"}</p>
         <Button
           type="null"
           onClick={() => {
-            router.push(`${routes.BLOG}/1`);
+            router.push(`${routes.BLOG}/${slug}`);
           }}
         >
           <ArrowRight color="#000" />

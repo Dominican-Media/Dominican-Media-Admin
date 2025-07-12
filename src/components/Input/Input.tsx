@@ -66,19 +66,24 @@ const Input = ({
           name={name}
           placeholder={placeholder}
           id={label}
-          onChange={onChange}
+          onChange={(e) => {
+            onChange && onChange(e);
+
+            if (condition !== undefined && condition === false) {
+              setInvalid(true);
+            } else {
+              setInvalid(false);
+            }
+          }}
           readOnly={readOnly}
           onBlur={(e) => {
+            if (onBlur) onBlur();
+
             if (isRequired && e.target.value === "") {
               setInvalid(true);
             } else {
               setInvalid(false);
             }
-
-            if (condition !== undefined && condition === false) {
-              setInvalid(true);
-            }
-            if (onBlur) onBlur();
           }}
           onFocus={() => {
             if (onFocus) {
