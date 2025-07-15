@@ -33,6 +33,7 @@ function BlogContextProvider({ children }: BlogContextProviderType) {
     description: "",
     createdAt: "",
     previewImage: null,
+    isFeatured: false,
   });
 
   const resetBlogState = () => {
@@ -49,6 +50,7 @@ function BlogContextProvider({ children }: BlogContextProviderType) {
       description: "",
       createdAt: "",
       previewImage: null,
+      isFeatured: false,
     });
   };
 

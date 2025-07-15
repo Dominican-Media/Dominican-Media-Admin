@@ -14,9 +14,10 @@ import classes from "./BlogList.module.css";
 
 type BlogListTypes = {
   data: blogItemType[];
+  url?: string;
 };
 
-const BlogList = ({ data }: BlogListTypes) => {
+const BlogList = ({ data, url }: BlogListTypes) => {
   // States
   const [modals, setModals] = useState<modalGenericType>({
     delete: false,
@@ -41,7 +42,7 @@ const BlogList = ({ data }: BlogListTypes) => {
       successFunction(res) {
         showToast(res?.data?.message, "success");
         setAllModalsFalse(setModals);
-        mutate("/blogs");
+        mutate(url);
       },
       errorFunction(err) {
         errorFlowFunction(err);

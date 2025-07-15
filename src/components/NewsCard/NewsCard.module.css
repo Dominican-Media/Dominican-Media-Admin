@@ -48,7 +48,7 @@
 }
 
 .categoryAndAction {
-  padding-block: 1rem;
+  padding-block: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,7 +59,18 @@
   font-size: 14px;
   line-height: 20px;
   letter-spacing: -0.3px;
-  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+}
+
+.draft {
+  color: #d50032;
+  background-color: #f7c6c7;
+}
+
+.published {
+  color: #006d26;
+  background-color: #c7e9e0;
 }
 
 .more {

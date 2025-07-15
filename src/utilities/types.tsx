@@ -17,6 +17,7 @@ export type blogItemType = {
   instagramUrl: string;
   createdAt?: string | Date;
   previewImage?: string | null;
+  isFeatured: boolean;
 };
 
 export type navItemTypes = {

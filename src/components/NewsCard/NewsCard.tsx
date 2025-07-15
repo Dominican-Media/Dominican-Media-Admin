@@ -88,11 +88,13 @@ const NewsCard = ({
 
       <div className={classes.textSection}>
         <h4>{title || "No title"}</h4>
-        <p>{description || "No description"}</p>
+        <p> {description || "No description"}</p>
       </div>
 
       <div className={classes.categoryAndAction}>
-        <p>{capitalize(type as string) || "No type"}</p>
+        <p className={classes[type as string]}>
+          {capitalize(type as string) || "No type"}
+        </p>
         <Button
           type="null"
           onClick={() => {

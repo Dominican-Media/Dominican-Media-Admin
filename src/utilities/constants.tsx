@@ -256,3 +256,4 @@ export const TEAM = [
 ];
 
 export const LOCAL_STORAGE_AUTH_KEY = "dominican-media-auth-token";
+export const PAGE_LIMIT = 12;

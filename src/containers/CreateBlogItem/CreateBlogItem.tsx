@@ -39,6 +39,7 @@ import {
 import CreateCategory from "../CreateCategory/CreateCategory";
 import classes from "./CreateBlogItem.module.css";
 import { mutate } from "swr";
+import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 
 type CreateBlogItemTypes = {
   edit?: boolean;
@@ -140,7 +141,7 @@ const CreateBlogItem = ({ edit }: CreateBlogItemTypes) => {
   }, []);
 
   useEffect(() => {
-    if (blogDataData) {
+    if (blogDataData && edit) {
       const singlyBlogData: blogItemType = blogDataData?.data?.blogItem;
 
       setBlogData((prevState) => {
@@ -157,6 +158,7 @@ const CreateBlogItem = ({ edit }: CreateBlogItemTypes) => {
           title: singlyBlogData?.title,
           type: singlyBlogData?.type,
           xUrl: singlyBlogData?.xUrl,
+          isFeatured: singlyBlogData?.isFeatured,
         };
       });
 
@@ -220,7 +222,7 @@ const CreateBlogItem = ({ edit }: CreateBlogItemTypes) => {
       requestCleanup: true,
       successFunction(res) {
         showToast(res?.data?.message, "success");
-        mutate(`/blogs/${blogId}`);
+        router.push(routes.BLOG);
       },
       id: "update-type",
       errorFunction(err) {
@@ -241,7 +243,12 @@ const CreateBlogItem = ({ edit }: CreateBlogItemTypes) => {
     formData.append("instagramUrl", blogData?.instagramUrl);
     formData.append("xUrl", blogData?.xUrl);
     formData.append("image", blogData?.image as File);
-    formData.append("type", blogData?.type);
+    if (edit) {
+      formData.append("type", blogData.type);
+    } else {
+      formData.append("type", "draft");
+    }
+    formData.append("isFeatured", String(blogData?.isFeatured));
 
     setFormDataState(formData);
   }, [blogData]);
@@ -372,6 +379,23 @@ const CreateBlogItem = ({ edit }: CreateBlogItemTypes) => {
               inputChangeHandler(e, setBlogData);
             }}
           />
+
+          <div className={classes.featured}>
+            <label htmlFor="featured">Feature this blog item?</label>
+            <ToggleSwitch
+              onChange={(e) => {
+                setBlogData((prevState) => {
+                  return { ...prevState, isFeatured: e?.target?.checked };
+                });
+              }}
+              checked={blogData?.isFeatured}
+              id="featured"
+            />
+            <p>
+              Featuring this blog item will reset the currently featured item to
+              not featured
+            </p>
+          </div>
 
           <div className={classes.buttonSection}>
             {edit ? (
